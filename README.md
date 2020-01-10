@@ -1,3 +1,3 @@
 # TowerIQ Test Task
 
-Demo: http://marunyak.github.io/toweriq
+Demo: http://marunyak.github.io/toweriq/
