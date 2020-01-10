@@ -10,17 +10,55 @@ import { getUsersFetch } from '../../services';
 import { fetchUsers } from '../../actions';
 
 class UsersPage extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      currentPage: 1,
+      perPage: 5
+    };
+  }
+
   componentDidMount() {
     const { getUsersFetch } = this.props;
     getUsersFetch();
   }
 
+  handleClick = (event) => {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
   render() {
+    const { currentPage, perPage } = this.state;
     const { users, loading, error } = this.props;
-    const hasData = !(loading || error);
-    const newItem = hasData ? users.map((item) => (
+    const pageNumbers = [];
+
+    const indexLast = currentPage * perPage;
+    const indexFirst = indexLast - perPage;
+    const currentTodos = users.slice(indexFirst, indexLast);
+
+    const newItem = !(loading || error) ? currentTodos.map((item) => (
       <UserItem user={item} key={item.id} />
     )) : null;
+
+    // eslint-disable-next-line no-plusplus
+    for (let i = 1; i <= Math.ceil(users.length / perPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map((number) => (
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+      <li
+        key={number}
+        className={currentPage === number ? 'active' : null}
+        id={number}
+        onClick={this.handleClick}
+      >
+        {number}
+      </li>
+    ));
+
     return (
       <>
         <Header />
@@ -30,6 +68,9 @@ class UsersPage extends React.Component {
             {!loading && error && 'Error ...'}
             {newItem}
           </div>
+          <ul className="pagination">
+            {renderPageNumbers || null}
+          </ul>
         </Main>
         <Footer />
       </>

@@ -47,12 +47,13 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
+    margin-top: 150px;
 }
 
 .users-list {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 150px;
+    /* margin-bottom: 150px; */
 }
 
 .user-item {
@@ -79,4 +80,29 @@ footer {
 .user-item > .text {
     display: block;
     margin-top: 50px;
+}
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    border-radius: 4px;
+}
+
+.pagination > li {
+    padding: 0.75rem 1rem;
+    margin-left: -1px;
+    min-width: 3.5rem;
+    text-align: center;
+    box-shadow: none !important;
+    border: 1px solid #ced4da !important;
+    color: black;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.pagination > li.active {
+    background-color: lightsalmon;
 }

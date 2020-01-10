@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 function UserItem(props) {
   const {
     id, name, surname, desc
+  // eslint-disable-next-line react/destructuring-assignment
   } = props.user;
 
   return (
